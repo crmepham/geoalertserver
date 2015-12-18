@@ -7,7 +7,7 @@ public class User {
 	private String accountCreationDate;
 	private String email;
 	private String lang;
-	private String key;
+	private String gender;
 
 	public User() {
 	}
@@ -17,13 +17,12 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String username, String password, String email, String lang, String securityAnswer,
-			String securityQuestion, String key) {
+	public User(String username, String password, String email, String lang, String gender) {
 		this.username = username;
 		this.password = password;
-		this.key = key;
 		this.email = email;
 		this.lang = lang;
+		this.gender = gender;
 	}
 
 	public String getUsername() {
@@ -46,14 +45,8 @@ public class User {
 		return lang;
 	}
 
-	public String getKey() {
-		return key;
-	}
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", accountCreationDate=" + accountCreationDate
-				+ ", email=" + email + ", lang=" + lang + ", key=" + key + "]";
+	public String getGender() {
+		return gender;
 	}
 
 }

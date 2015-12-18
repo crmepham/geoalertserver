@@ -10,11 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import crm.geoalert.geoalertserver.services.User;
 import crm.geoalert.geoalertserver.services.UserService;
-import crm.geoalert.geoalertserver.utilities.DataSourceFactory;
 
 @Path("/v1/user")
 @WebServlet("/v1/user/*")
@@ -36,8 +33,29 @@ public class UserController {
     @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     public Response AuthenticateUser(@FormParam("username") String username, @FormParam("password") String password) {
+    	
     	User user = new User(username, password);
-    	return new UserService(user).AuthenticateUser();
+    	return new UserService(user).authenticateUser();
     }
+    
+    /**
+    *
+    * @param username username
+    * @param password password
+    * @param email contact email
+    * @param lang users preferred language
+    * @param gender users gender
+    * @return HTTP error code
+    */
+   @Path("/register")
+   @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response registerUser(@FormParam("username") String username, @FormParam("password") String password,
+                                @FormParam("email") String email, @FormParam("lang") String lang, @FormParam("gender") String gender){
+
+	   	User user = new User(username, password, email, lang, gender);
+   		return new UserService(user).registerUser();
+
+   }
 
 }

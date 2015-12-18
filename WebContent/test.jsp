@@ -8,10 +8,25 @@
 </head>
 <body>
 <p>Test user authentication</p>
-<form id="loginForm" action="http://localhost:8080/geoalertserver/api/v1/user/authenticate" method="post">
-<input type="text" id="username" name="username" placeholder="username">
-<input type="text" id="password" name="password" placeholder="password">
-<input type="submit" name="loginSubmit" id="loginSubmit" value="Login">
+<form action="http://localhost:8080/geoalertserver/api/v1/user/authenticate" method="post">
+<input type="text" name="username" placeholder="username">
+<input type="text" name="password" placeholder="password">
+<input type="submit" name="loginSubmit" value="Login">
+</form>
+<hr>
+<p>Test user registration</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/register" method="post">
+<input type="text" name="username" placeholder="username">
+<input type="text" name="password" placeholder="password">
+<input type="text" name="email" placeholder="email">
+<select name="lang">
+	<option value="en">en</option>
+</select>
+<select name="gender">
+	<option value="f">f</option>
+	<option value="m">m</option>
+</select>
+<input type="submit" name="registerSubmit" value="Register">
 </form>
 <hr>
 </body>
