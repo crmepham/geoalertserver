@@ -7,7 +7,7 @@ public class User {
 	private String accountCreationDate;
 	private String email;
 	private String lang;
-	private String gender;
+	private String contactNumber;
 
 	public User() {
 	}
@@ -17,12 +17,12 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String username, String password, String email, String lang, String gender) {
+	public User(String username, String password, String email, String lang, String contactNumber) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.lang = lang;
-		this.gender = gender;
+		this.contactNumber = contactNumber;
 	}
 
 	public String getUsername() {
@@ -45,8 +45,23 @@ public class User {
 		return lang;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public boolean isIncompleteUser() {
+		if (this.username.isEmpty() || this.password.isEmpty() || this.email.isEmpty() || this.lang.isEmpty()
+				|| this.contactNumber.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", accountCreationDate=" + accountCreationDate
+				+ ", email=" + email + ", lang=" + lang + ", contactNumber=" + contactNumber
+				+ "]";
 	}
 
 }

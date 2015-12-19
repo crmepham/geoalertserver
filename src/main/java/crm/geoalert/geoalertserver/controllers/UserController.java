@@ -27,7 +27,7 @@ public class UserController {
     /**
      * @param username username to authenticate
      * @param password encrypted password to authenticate
-     * @return  HTTP error code
+     * @return  HTTP response code
      */
     @Path("/authenticate")
     @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -44,18 +44,29 @@ public class UserController {
     * @param password password
     * @param email contact email
     * @param lang users preferred language
-    * @param gender users gender
-    * @return HTTP error code
+    * @return HTTP response code
     */
    @Path("/register")
    @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
    @Produces(MediaType.APPLICATION_JSON)
-   public Response registerUser(@FormParam("username") String username, @FormParam("password") String password,
-                                @FormParam("email") String email, @FormParam("lang") String lang, @FormParam("gender") String gender){
+   public Response registerUser(@FormParam("username") String username, @FormParam("password") String password, @FormParam("contactNumber") String contactNumber,
+                                @FormParam("email") String email, @FormParam("lang") String lang){
 
-	   	User user = new User(username, password, email, lang, gender);
+	   	User user = new User(username, password, email, lang, contactNumber);
    		return new UserService(user).registerUser();
 
    }
 
+   /**
+    * 
+    * @param email email of user who has forgotten their password
+    * @return HTTP response code
+    */
+  @Path("/account/recover")
+  @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response recoverAccount(@FormParam("email") String email){
+  		return new UserService().recoverAccount(email);
+  }
+   
 }

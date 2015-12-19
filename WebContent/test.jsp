@@ -19,15 +19,20 @@
 <input type="text" name="username" placeholder="username">
 <input type="text" name="password" placeholder="password">
 <input type="text" name="email" placeholder="email">
+<input type="text" name="contactNumber" placeholder="phone number">
 <select name="lang">
 	<option value="en">en</option>
-</select>
-<select name="gender">
-	<option value="f">f</option>
-	<option value="m">m</option>
 </select>
 <input type="submit" name="registerSubmit" value="Register">
 </form>
 <hr>
+<p>Test account recovery</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/account/recover" method="post">
+<input type="text" name="email" placeholder="email">
+<input type="submit" name="accountRecoverSubmit" value="Send email">
+</form>
+<hr>
+
+
 </body>
 </html>
