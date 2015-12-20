@@ -1,4 +1,4 @@
-package crm.geoalert.geoalertserver.controllers;
+package geoalertserver.controllers;
 
 import javax.servlet.annotation.WebServlet;
 import javax.ws.rs.Consumes;
@@ -10,8 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import crm.geoalert.geoalertserver.services.User;
-import crm.geoalert.geoalertserver.services.UserService;
+import geoalertserver.services.User;
+import geoalertserver.services.UserService;
 
 @Path("/v1/user")
 @WebServlet("/v1/user/*")

@@ -1,4 +1,4 @@
-package crm.geoalert.geoalertserver.services;
+package geoalertserver.services;
 
 public class User {
 

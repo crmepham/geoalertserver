@@ -1,4 +1,4 @@
-package crm.geoalert.geoalertserver.utilities;
+package geoalertserver.utilities;
 
 import javax.sql.DataSource;
 

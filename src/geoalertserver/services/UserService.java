@@ -1,4 +1,4 @@
-package crm.geoalert.geoalertserver.services;
+package geoalertserver.services;
 
 import java.sql.ResultSet;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import crm.geoalert.geoalertserver.utilities.DataSourceFactory;
+import geoalertserver.utilities.DataSourceFactory;
 
 public class UserService extends BaseService{
 
