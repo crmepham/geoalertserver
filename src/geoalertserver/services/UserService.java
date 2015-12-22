@@ -26,7 +26,6 @@ public class UserService extends BaseService{
 	}
 
 	public Response authenticateUser() {
-		ResultSet rs = null;
 
 		try {
 			int rowsAffected = jdbcTemplate.queryForInt("select count(*) from user where username = ? and password = ?",
@@ -43,6 +42,78 @@ public class UserService extends BaseService{
 
 		return response;
 	}
+	
+	public Response confirmEmail() {
+
+		try {
+			int rowsAffected = jdbcTemplate.queryForInt("select count(*) from user where email = ?",
+					user.getEmail());
+
+			if (rowsAffected > 0) {
+				response = Response.status(201).entity("email exists").build();
+			} else {
+				response = Response.status(401).entity("email does not exist").build();
+			}
+		} catch (Exception e) {
+			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
+		}
+
+		return response;
+	}
+	
+	public Response confirmSecurityAnswer() {
+
+		try {
+			int rowsAffected = jdbcTemplate.queryForInt("select count(*) from user where email = ? and securityQuestion = ? and securityAnswer = ?",
+					user.getEmail(), user.getSecurityQuestion(), user.getSecurityAnswer());
+
+			if (rowsAffected > 0) {
+				response = Response.status(201).entity("valid security answer").build();
+			} else {
+				response = Response.status(401).entity("invalid security answer").build();
+			}
+		} catch (Exception e) {
+			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
+		}
+
+		return response;
+	}
+	
+	public Response saveNewPassword() {
+
+		try {
+			int rowsAffected = jdbcTemplate.update("update user set password = ? where email = ? and securityQuestion = ? and securityAnswer = ?",
+					user.getPassword(), user.getEmail(), user.getSecurityQuestion(), user.getSecurityAnswer());
+
+			if (rowsAffected > 0) {
+				response = Response.status(201).entity("successfully updated password").build();
+			} else {
+				response = Response.status(401).entity("could not update password").build();
+			}
+		} catch (DataAccessException e) {
+			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
+			e.printStackTrace();
+		}
+
+		return response;
+	}
+	
+	public Response retrieveSecurityQuestion() {
+
+		try {
+			String securityQuestion = (String)jdbcTemplate.queryForObject("select securityQuestion from user where email = ?", new Object[]{user.getEmail()}, String.class);
+			if(!securityQuestion.isEmpty()){
+				response = Response.status(201).entity(securityQuestion).header("securityQuestin", securityQuestion) .build();
+			}else{
+				response = Response.status(401).entity("could not retrieve security question").build();
+			}
+			
+		} catch (Exception e) {
+			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
+		}
+
+		return response;
+	}
 
 	public Response registerUser() {
 
@@ -53,39 +124,19 @@ public class UserService extends BaseService{
 		} else {
 			try {
 				int rowsAffected = jdbcTemplate.update(
-						"insert into user (username, password, accountCreationDate, email, lang, contactNumber)"
-								+ "values(?, ?, now(), ?, ?, ?)",
-						user.getUsername(), user.getPassword(), user.getEmail(), user.getLang(), user.getContactNumber());
+						"insert into user (username, password, accountCreationDate, email, lang, contactNumber, securityQuestion, securityAnswer)"
+								+ "values(?, ?, now(), ?, ?, ?, ?, ?)",
+						user.getUsername(), user.getPassword(), user.getEmail(), user.getLang(), user.getContactNumber(), user.getSecurityQuestion(), user.getSecurityAnswer());
 
 				if (rowsAffected > 0) {
 					response = Response.status(201).entity("User registered successfully").build();
 				} else {
-					response = Response.status(500).entity("User could not be registered").build();
+					response = Response.status(401).entity("User could not be registered").build();
 				}
 
 			} catch (Exception e) {
 				response = Response.status(500).entity("Server error: " + e.getMessage()).build();
 			}
-		}
-		return response;
-	}
-	
-	public Response recoverAccount(String email) {
-		// validate email in app
-		String password = "";
-		
-		try{
-			List<String> list = jdbcTemplate.queryForList("select password from user where email = ?", new Object[]{email}, String.class);
-			if(list.size() > 0){
-				password = list.get(0);
-				new EmailService().sendEmail(email, email, "Your password is: " + password + ".");
-				response = Response.status(200).entity("Password successfully sent").build();
-			}else{
-				response = Response.status(404).entity("Could not find user email").build();
-			}
-		} catch(DataAccessException e) {
-			e.printStackTrace();
-			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
 		}
 		return response;
 	}

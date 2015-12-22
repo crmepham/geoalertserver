@@ -26,13 +26,17 @@
 <input type="submit" name="registerSubmit" value="Register">
 </form>
 <hr>
-<p>Test account recovery</p>
-<form action="http://localhost:8080/geoalertserver/api/v1/user/account/recover" method="post">
+<p>Confirm email exists</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/confirm/email" method="post">
 <input type="text" name="email" placeholder="email">
-<input type="submit" name="accountRecoverSubmit" value="Send email">
+<input type="submit" name="confirmEmailSubmit" value="Confirm email">
 </form>
 <hr>
-
-
+<p>Retrieve security question</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/retrieve/security/question" method="post">
+<input type="text" name="email" placeholder="email">
+<input type="submit" name="confirmEmailSubmit" value="Retrieve security question">
+</form>
+<hr>
 </body>
 </html>

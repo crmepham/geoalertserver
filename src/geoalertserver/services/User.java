@@ -8,6 +8,8 @@ public class User {
 	private String email;
 	private String lang;
 	private String contactNumber;
+	private String securityQuestion;
+	private String securityAnswer;
 
 	public User() {
 	}
@@ -17,12 +19,15 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String username, String password, String email, String lang, String contactNumber) {
+	public User(String username, String password, String email, String lang, String contactNumber,
+			String securityQuestion, String securityAnswer) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.lang = lang;
 		this.contactNumber = contactNumber;
+		this.securityQuestion = securityQuestion;
+		this.securityAnswer = securityAnswer;
 	}
 
 	public String getUsername() {
@@ -33,12 +38,20 @@ public class User {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getAccountCreationDate() {
 		return accountCreationDate;
 	}
 
 	public String getEmail() {
 		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getLang() {
@@ -49,9 +62,25 @@ public class User {
 		return contactNumber;
 	}
 
+	public String getSecurityQuestion() {
+		return securityQuestion;
+	}
+
+	public String getSecurityAnswer() {
+		return securityAnswer;
+	}
+
+	public void setSecurityQuestion(String securityQuestion) {
+		this.securityQuestion = securityQuestion;
+	}
+
+	public void setSecurityAnswer(String securityAnswer) {
+		this.securityAnswer = securityAnswer;
+	}
+
 	public boolean isIncompleteUser() {
 		if (this.username.isEmpty() || this.password.isEmpty() || this.email.isEmpty() || this.lang.isEmpty()
-				|| this.contactNumber.isEmpty()) {
+				|| this.contactNumber.isEmpty() || this.securityQuestion.isEmpty() || this.securityAnswer.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -60,8 +89,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", accountCreationDate=" + accountCreationDate
-				+ ", email=" + email + ", lang=" + lang + ", contactNumber=" + contactNumber
-				+ "]";
+				+ ", email=" + email + ", lang=" + lang + ", contactNumber=" + contactNumber + "]";
 	}
 
 }

@@ -9,6 +9,8 @@ create table if not exists user(
 	lang varchar(2) not null,
 	status varchar(20) not null default 'Inactive',
 	contactNumber varchar(50) not null,
+	securityQuestion varchar(200) not null,
+	securityAnswer varchar(200) not null,
 	gender char(1),
 	fullName varchar(200),
 	dob datetime,

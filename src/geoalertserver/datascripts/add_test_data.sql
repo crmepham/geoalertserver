@@ -4,8 +4,8 @@ insert into user(
 username, password, accountCreationDate,
 email, lang, gender)
 values(
-'crm', 'password', now(),
-'test@email.co.uk','gb', 'm');
+'ddd', 'ddd', now(),
+'crmepham@hotmail.co.uk','gb', 'm');
 
 insert into user(
 username, password, accountCreationDate,

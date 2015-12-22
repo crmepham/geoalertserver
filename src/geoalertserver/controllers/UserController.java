@@ -50,23 +50,60 @@ public class UserController {
    @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
    @Produces(MediaType.APPLICATION_JSON)
    public Response registerUser(@FormParam("username") String username, @FormParam("password") String password, @FormParam("contactNumber") String contactNumber,
-                                @FormParam("email") String email, @FormParam("lang") String lang){
+                                @FormParam("email") String email, @FormParam("lang") String lang, @FormParam("securityQuestion") String securityQuestion, @FormParam("securityAnswer") String securityAnswer){
 
-	   	User user = new User(username, password, email, lang, contactNumber);
+	   	User user = new User(username, password, email, lang, contactNumber, securityQuestion, securityAnswer);
    		return new UserService(user).registerUser();
 
    }
+   
+   @Path("/confirm/email")
+   @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response confirmEmail(@FormParam("email") String email){
 
-   /**
-    * 
-    * @param email email of user who has forgotten their password
-    * @return HTTP response code
-    */
-  @Path("/account/recover")
-  @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response recoverAccount(@FormParam("email") String email){
-  		return new UserService().recoverAccount(email);
-  }
+	   	User user = new User();
+	   	user.setEmail(email);
+   		return new UserService(user).confirmEmail();
+
+   }
+   
+   @Path("/save/new/password")
+   @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response saveNewPassword(@FormParam("newPassword") String newPassword, @FormParam("email") String email, @FormParam("securityQuestion") String securityQuestion, @FormParam("securityAnswer") String securityAnswer){
+
+	   	User user = new User();
+	   	user.setPassword(newPassword);
+	   	user.setEmail(email);
+	   	user.setSecurityQuestion(securityQuestion);
+	   	user.setSecurityAnswer(securityAnswer);
+   		return new UserService(user).saveNewPassword();
+
+   }
+   
+   @Path("/confirm/security/answer")
+   @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response confirmSecurityAnswer(@FormParam("email") String email, @FormParam("answer") String answer, @FormParam("question") String question){
+
+	   	User user = new User();
+	   	user.setEmail(email);
+	   	user.setSecurityAnswer(answer);
+	   	user.setSecurityQuestion(question);
+   		return new UserService(user).confirmSecurityAnswer();
+
+   }
+   
+   @Path("/retrieve/security/question")
+   @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response retrieveSecurityQuestion(@FormParam("email") String email){
+
+	   	User user = new User();
+	   	user.setEmail(email);
+   		return new UserService(user).retrieveSecurityQuestion();
+
+   }
    
 }
