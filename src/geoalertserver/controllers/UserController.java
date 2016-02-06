@@ -106,4 +106,15 @@ public class UserController {
 
    }
    
+   @Path("/retrieve/profile/information")
+   @POST @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response retrieveProfileInformation(@FormParam("username") String username){
+
+	   	User user = new User();
+	   	user.setUsername(username);
+   		return new UserService(user).retrieveProfileInformation();
+
+   }
+   
 }

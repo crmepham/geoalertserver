@@ -38,5 +38,11 @@
 <input type="submit" name="confirmEmailSubmit" value="Retrieve security question">
 </form>
 <hr>
+<p>Retrieve user information</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/retrieve/profile/information" method="post">
+<input type="text" name="username" placeholder="username">
+<input type="submit" name="confirmEmailSubmit" value="Retrieve user information">
+</form>
+<hr>
 </body>
 </html>

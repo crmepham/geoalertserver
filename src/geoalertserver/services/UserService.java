@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.ws.rs.core.Response;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import geoalertserver.utilities.DataSourceFactory;
+import geoalertserver.utilities.UserRowMapper;
 
 public class UserService extends BaseService{
 
@@ -119,8 +122,6 @@ public class UserService extends BaseService{
 
 		if (this.authenticateUser().getStatus() == 200) {
 			response = Response.status(401).entity("User already exists").build();
-		} else if(user.isIncompleteUser()) { 
-			response = Response.status(401).entity("User must supply more information").build();
 		} else {
 			try {
 				int rowsAffected = jdbcTemplate.update(
@@ -138,6 +139,24 @@ public class UserService extends BaseService{
 				response = Response.status(500).entity("Server error: " + e.getMessage()).build();
 			}
 		}
+		return response;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Response retrieveProfileInformation() {
+		try {
+			User dbUser = (User)jdbcTemplate.queryForObject("select * from user where username =?", new Object[]{user.getUsername()}, new UserRowMapper());
+			if(dbUser != null){
+				ObjectMapper mapper = new ObjectMapper();
+				response = Response.status(201).entity(mapper.writeValueAsString(dbUser)).header("user", mapper.writeValueAsString(dbUser)) .build();
+			}else{
+				response = Response.status(401).entity("could not retrieve user information").build();
+			}
+			
+		} catch (Exception e) {
+			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
+		}
+
 		return response;
 	}
 }
