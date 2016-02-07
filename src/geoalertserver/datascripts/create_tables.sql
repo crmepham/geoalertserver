@@ -11,6 +11,7 @@ create table if not exists user(
 	contactNumber varchar(50) not null,
 	securityQuestion varchar(200) not null,
 	securityAnswer varchar(200) not null,
+	profileImage longblob,
 	gender char(1),
 	fullName varchar(200),
 	dob datetime,

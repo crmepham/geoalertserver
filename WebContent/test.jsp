@@ -44,5 +44,18 @@
 <input type="submit" name="confirmEmailSubmit" value="Retrieve user information">
 </form>
 <hr>
+<p>Upload profile image</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/upload/profile/image" method="post" enctype="multipart/form-data">
+<input type="text" name="username" placeholder="username">
+<input type="file" name="image">
+<input type="submit" name="confirmEmailSubmit" value="upload">
+</form>
+<hr>
+<p>Get profile image bytes</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/retrieve/profile/image" method="post" >
+<input type="text" name="username" placeholder="username">
+<input type="submit" name="confirmEmailSubmit" value="upload">
+</form>
+<hr>
 </body>
 </html>
