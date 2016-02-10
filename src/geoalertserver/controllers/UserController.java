@@ -187,4 +187,16 @@ public class UserController {
 
 	}
 	
+	@Path("/retrieve/user/contacts")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveUserContacts(@FormParam("username") String username) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).retrieveUserContacts();
+
+	}
+	
 }

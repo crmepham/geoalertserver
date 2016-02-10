@@ -44,6 +44,14 @@
 <input type="submit" name="confirmEmailSubmit" value="Retrieve user information">
 </form>
 <hr>
+<p>Update user information</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/update/profile/information" method="post">
+<i>ccc,ccc,1111-11-11 11:11:11,111,111,11,111,111,11,111,111,1111</i><br>
+<input type="text" name="username" placeholder="username">
+<input type="text" name="profileInfo" placeholder="comma seperated user data">
+<input type="submit" name="confirmEmailSubmit" value="Update user information">
+</form>
+<hr>
 <p>Upload profile image</p>
 <form action="http://localhost:8080/geoalertserver/api/v1/user/upload/profile/image" method="post" enctype="multipart/form-data">
 <input type="text" name="username" placeholder="username">
@@ -55,6 +63,12 @@
 <form action="http://localhost:8080/geoalertserver/api/v1/user/retrieve/profile/image" method="post" >
 <input type="text" name="username" placeholder="username">
 <input type="submit" name="confirmEmailSubmit" value="upload">
+</form>
+<hr>
+<p>Retrieve user contacts</p>
+<form action="http://localhost:8080/geoalertserver/api/v1/user/retrieve/user/contacts" method="post" >
+<input type="text" name="username" placeholder="username">
+<input type="submit" name="confirmEmailSubmit" value="Retrieve contacts">
 </form>
 <hr>
 </body>

@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.Response;
 
@@ -17,6 +19,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.google.gson.Gson;
 import com.mysql.jdbc.Blob;
 
 import geoalertserver.utilities.DataSourceFactory;
@@ -231,6 +234,35 @@ public class UserService extends BaseService {
 		} catch (DataAccessException e) {
 			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
 			e.printStackTrace();
+		}
+
+		return response;
+	}
+
+	public Response retrieveUserContacts() {
+		try {
+			List<User> userList = new ArrayList<>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList("select u.username, u.status, c.userId, c.contactId from contact c "+
+																		"join user u on c.contactId=u.userId "+
+																		"where c.userId=(select userId from user where username=?)", user.getUsername());
+			for(Map row : rows) {
+				User user = new User();
+				user.setUsername((String)row.get("username"));
+				user.setStatus((String)row.get("status"));
+				userList.add(user);
+			}
+			
+			if (userList.size() > 0) {
+				
+				String jsonString = new Gson().toJson(userList);
+				
+				response = Response.status(201).entity(jsonString).build();
+			} else {
+				response = Response.status(401).entity("This user has no contacts").build();
+			}
+
+		} catch (Exception e) {
+			response = Response.status(500).entity("Server error: " + e.getMessage()).build();
 		}
 
 		return response;
