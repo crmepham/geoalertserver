@@ -24,7 +24,9 @@ create table if not exists user(
 	nextOfKinFullName varchar(200),
 	nextofKinRelationship varchar(50),
 	nextOfKinContactNumber varchar(50),
-	deleted tinyint(1) not null default 0
+	deleted tinyint(1) not null default 0,
+	showMap tinyint(1) not null default 1,
+	locationId int(11)
 )engine=InnoDB;
 
 create table if not exists contact (
@@ -33,4 +35,20 @@ create table if not exists contact (
 	contactId int(11) not null,
 	accepted tinyint(1) not null default 0,
 	deleted tinyint(1) not null default 0
+)engine=InnoDB;
+
+create table if not exists location (
+	id int(11) not null primary key auto_increment,
+	userId int(11),
+	latitude varchar(50),
+	longitude varchar(50),
+	lastUpdated datetime
+)engine=InnoDB;
+
+create table if not exists notification (
+	id int(11) not null primary key auto_increment,
+	userId int(11) not null,
+	senderId int(11) not null,
+	dateCreated datetime,
+	deleted tinyint(1) default 0
 )engine=InnoDB;

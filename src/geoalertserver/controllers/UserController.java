@@ -15,7 +15,8 @@ import javax.ws.rs.core.Response;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 
-import geoalertserver.services.User;
+import geoalertserver.entities.User;
+import geoalertserver.entities.User;
 import geoalertserver.services.UserService;
 
 @Path("/v1/user")
@@ -187,6 +188,19 @@ public class UserController {
 
 	}
 	
+	@Path("/update/status")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateStatus(@FormParam("username") String username, @FormParam("status") String status) {
+		
+		User user = new User();
+		user.setUsername(username);
+		user.setStatus(status);
+		return new UserService(user).updateStatus();
+
+	}
+	
 	@Path("/retrieve/user/contacts")
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -199,4 +213,124 @@ public class UserController {
 
 	}
 	
+	@Path("/delete/contact")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteContact(@FormParam("username") String username, @FormParam("contactId") int contactId) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).deleteContact(contactId);
+
+	}
+	
+	@Path("/retrieve/pending/contact/requests")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrievePendingContactRequests(@FormParam("username") String username) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).retrievePendingContactRequests();
+
+	}
+	
+	@Path("/accept/contact/request")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response acceptContactRequest(@FormParam("username") String username, @FormParam("userId") int userId) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).acceptContactRequest(userId);
+
+	}
+	
+	@Path("/decline/contact/request")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response declinetContactRequest(@FormParam("username") String username, @FormParam("userId") int userId) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).declineContactRequest(userId);
+
+	}
+	
+	@Path("/add/contact")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addContact(@FormParam("username") String username, @FormParam("contactUsername") String contactUsername) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).addContact(contactUsername);
+
+	}
+	
+	@Path("/add/notification")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addNotification(@FormParam("username") String username, @FormParam("contactUsername") String contactUsername) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).addNotification(contactUsername);
+
+	}
+	
+	@Path("/retreive/notifications")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveNotifications(@FormParam("username") String username) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).retrieveNotifications();
+
+	}
+	
+	@Path("/delete/notification")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteNotification(@FormParam("username") String username, @FormParam("contactUsername") String contactUsername) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).deleteNotification(contactUsername);
+
+	}
+	
+	@Path("/retreive/status")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveProfileStatus(@FormParam("username") String username) {
+
+		User user = new User();
+		user.setUsername(username);
+		return new UserService(user).retrieveProfileStatus();
+
+	}
+	
+	@Path("/update/map/view")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateMapView(@FormParam("username") String username, @FormParam("showMap") boolean showMap) {
+		
+		User user = new User();
+		user.setUsername(username);
+		user.setShowMap(showMap);
+		return new UserService(user).updateMapView();
+
+	}
 }

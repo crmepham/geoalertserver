@@ -5,13 +5,14 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import geoalertserver.services.User;
+import geoalertserver.entities.User;
 
 public class UserRowMapper implements RowMapper{
 
 	@Override
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		User user = new User();
+		user.setShowMap(rs.getBoolean("showMap"));
 		user.setUsername(rs.getString("username"));
 		user.setStatus(rs.getString("status"));
 		user.setGender(rs.getString("gender"));

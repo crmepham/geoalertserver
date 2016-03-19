@@ -1,7 +1,8 @@
-package geoalertserver.services;
+package geoalertserver.entities;
 
 public class User {
 
+	private int userId;
 	private String username;
 	private String password;
 	private String accountCreationDate;
@@ -24,6 +25,15 @@ public class User {
 	private String nextOfKinFullName;
 	private String nextOfKinRelationship;
 	private String nextOfKinContactNumber;
+	private boolean showMap;
+
+	public boolean isShowMap() {
+		return showMap;
+	}
+
+	public void setShowMap(boolean showMap) {
+		this.showMap = showMap;
+	}
 
 	public User() {
 	}
@@ -45,15 +55,15 @@ public class User {
 	}
 
 	public String getUsername() {
-		if(this.username == null){
-			return "";
+		if (this.username == null) {
+			return " ";
 		}
 		return username;
 	}
 
 	public String getPassword() {
-		if(this.password == null){
-			return "";
+		if (this.password == null) {
+			return " ";
 		}
 		return password;
 	}
@@ -63,15 +73,15 @@ public class User {
 	}
 
 	public String getAccountCreationDate() {
-		if(this.accountCreationDate == null){
-			return "";
+		if (this.accountCreationDate == null) {
+			return " ";
 		}
 		return accountCreationDate;
 	}
 
 	public String getEmail() {
-		if(this.email == null){
-			return "";
+		if (this.email == null) {
+			return " ";
 		}
 		return email;
 	}
@@ -81,29 +91,29 @@ public class User {
 	}
 
 	public String getLang() {
-		if(this.lang == null){
-			return "";
+		if (this.lang == null) {
+			return " ";
 		}
 		return lang;
 	}
 
 	public String getContactNumber() {
-		if(this.contactNumber == null){
-			return "";
+		if (this.contactNumber == null) {
+			return " ";
 		}
 		return contactNumber;
 	}
 
 	public String getSecurityQuestion() {
-		if(this.securityQuestion == null){
-			return "";
+		if (this.securityQuestion == null) {
+			return " ";
 		}
 		return securityQuestion;
 	}
 
 	public String getSecurityAnswer() {
-		if(this.securityAnswer == null){
-			return "";
+		if (this.securityAnswer == null) {
+			return " ";
 		}
 		return securityAnswer;
 	}
@@ -117,8 +127,8 @@ public class User {
 	}
 
 	public String getStatus() {
-		if(this.status == null){
-			return "";
+		if (this.status == null) {
+			return " ";
 		}
 		return status;
 	}
@@ -128,8 +138,8 @@ public class User {
 	}
 
 	public String getGender() {
-		if(this.gender == null){
-			return "";
+		if (this.gender == null) {
+			return " ";
 		}
 		return gender;
 	}
@@ -139,8 +149,8 @@ public class User {
 	}
 
 	public String getFullName() {
-		if(this.fullName == null){
-			return "";
+		if (this.fullName == null) {
+			return " ";
 		}
 		return fullName;
 	}
@@ -150,8 +160,8 @@ public class User {
 	}
 
 	public String getDob() {
-		if(this.dob == null){
-			return "";
+		if (this.dob == null) {
+			return " ";
 		}
 		return dob;
 	}
@@ -161,8 +171,8 @@ public class User {
 	}
 
 	public String getBloodType() {
-		if(this.bloodType == null){
-			return "";
+		if (this.bloodType == null) {
+			return " ";
 		}
 		return bloodType;
 	}
@@ -172,8 +182,8 @@ public class User {
 	}
 
 	public String getHeight() {
-		if(this.height == null){
-			return "";
+		if (this.height == null) {
+			return " ";
 		}
 		return height;
 	}
@@ -183,8 +193,8 @@ public class User {
 	}
 
 	public String getWeight() {
-		if(this.weight == null){
-			return "";
+		if (this.weight == null) {
+			return " ";
 		}
 		return weight;
 	}
@@ -194,8 +204,8 @@ public class User {
 	}
 
 	public String getClothingTop() {
-		if(this.clothingTop == null){
-			return "";
+		if (this.clothingTop == null) {
+			return " ";
 		}
 		return clothingTop;
 	}
@@ -205,8 +215,8 @@ public class User {
 	}
 
 	public String getClothingBottom() {
-		if(this.clothingBottom == null){
-			return "";
+		if (this.clothingBottom == null) {
+			return " ";
 		}
 		return clothingBottom;
 	}
@@ -216,8 +226,8 @@ public class User {
 	}
 
 	public String getClothingShoes() {
-		if(this.clothingShoes == null){
-			return "";
+		if (this.clothingShoes == null) {
+			return " ";
 		}
 		return clothingShoes;
 	}
@@ -227,8 +237,8 @@ public class User {
 	}
 
 	public String getNextOfKinFullName() {
-		if(this.nextOfKinFullName == null){
-			return "";
+		if (this.nextOfKinFullName == null) {
+			return " ";
 		}
 		return nextOfKinFullName;
 	}
@@ -238,8 +248,8 @@ public class User {
 	}
 
 	public String getNextOfKinRelationship() {
-		if(this.nextOfKinRelationship == null){
-			return "";
+		if (this.nextOfKinRelationship == null) {
+			return " ";
 		}
 		return nextOfKinRelationship;
 	}
@@ -249,8 +259,8 @@ public class User {
 	}
 
 	public String getNextOfKinContactNumber() {
-		if(this.nextOfKinContactNumber == null){
-			return "";
+		if (this.nextOfKinContactNumber == null) {
+			return " ";
 		}
 		return nextOfKinContactNumber;
 	}
@@ -261,6 +271,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public void setAccountCreationDate(String accountCreationDate) {
